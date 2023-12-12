@@ -8,5 +8,7 @@ import lombok.Data;
 @JsonIgnoreProperties
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PagingModel {
-
+    private Integer count;
+    private String next;
+    private String previous;
 }
