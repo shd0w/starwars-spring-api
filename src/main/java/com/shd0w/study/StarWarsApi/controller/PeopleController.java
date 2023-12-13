@@ -25,8 +25,7 @@ public class PeopleController {
     @GetMapping
     public ResponseEntity<PeopleModel> getAllPeople(@RequestParam(required = false) Integer page, String searchQuery) {
 
-        URI uri = getUri(page, searchQuery, endpointUri);
-        System.out.println("uri = " + uri);
+        URI uri = getUri(page, searchQuery, endpointUri, null);
 
         try {
             ResponseEntity<PeopleModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, PeopleModel.class);
@@ -39,9 +38,9 @@ public class PeopleController {
     @GetMapping("/{id}")
     public ResponseEntity<PeopleModel> getPeopleById(@PathVariable Integer id) {
 
-        URI uri = getUri(null, null, endpointUri);
+        URI uri = getUri(null, null, endpointUri, id);
 
-        PeopleModel listPeople = restTemplate.getForObject(uri + "/" + id, PeopleModel.class);
+        PeopleModel listPeople = restTemplate.getForObject(uri, PeopleModel.class);
 
         return ResponseEntity.ok(listPeople);
     }

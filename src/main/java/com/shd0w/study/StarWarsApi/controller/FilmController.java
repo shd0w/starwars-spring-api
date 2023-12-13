@@ -24,7 +24,7 @@ public class FilmController {
     @GetMapping
     public ResponseEntity<FilmModel> getAllFilms(@RequestParam(required = false) Integer page, String searchQuery){
 
-        URI uri = getUri(page, searchQuery, endpointUri);
+        URI uri = getUri(page, searchQuery, endpointUri, null);
 
         try {
             ResponseEntity<FilmModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, FilmModel.class);
@@ -40,10 +40,10 @@ public class FilmController {
     @GetMapping("/{id}")
     public ResponseEntity<FilmModel> getAllFilms(@PathVariable Integer id){
 
-        URI uri = getUri(null, null, endpointUri);
+        URI uri = getUri(null, null, endpointUri, id);
 
         try {
-            ResponseEntity<FilmModel> response = restTemplate.exchange(uri+"/"+id, HttpMethod.GET, null, FilmModel.class);
+            ResponseEntity<FilmModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, FilmModel.class);
             return response;
         }
         catch(HttpClientErrorException e)
