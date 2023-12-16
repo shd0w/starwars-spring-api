@@ -1,6 +1,7 @@
 package com.shd0w.study.StarWarsApi.controller;
 
 import com.shd0w.study.StarWarsApi.model.PeopleModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,9 @@ import java.net.URI;
 import static com.shd0w.study.StarWarsApi.utils.GetUri.getUri;
 
 @ResponseBody
-@RequestMapping("/api/people")
+@RequestMapping("/api/peoples")
 @RestController
+@Slf4j
 public class PeopleController {
 
 
@@ -29,6 +31,7 @@ public class PeopleController {
 
         try {
             ResponseEntity<PeopleModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, PeopleModel.class);
+            System.out.println("response = " + response.getBody());
             return response;
         } catch (HttpClientErrorException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

@@ -36,7 +36,7 @@ public class StarshipController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StarshipModel> getAllStarships(@PathVariable Integer id) {
+    public ResponseEntity<StarshipModel> getStarshipById(@PathVariable Integer id) {
 
         URI uri = getUri(null, null, endpointUri, id);
 
