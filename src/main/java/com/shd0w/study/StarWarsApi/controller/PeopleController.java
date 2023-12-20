@@ -1,6 +1,7 @@
 package com.shd0w.study.StarWarsApi.controller;
 
 import com.shd0w.study.StarWarsApi.model.PeopleModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,9 @@ import java.net.URI;
 import static com.shd0w.study.StarWarsApi.utils.GetUri.getUri;
 
 @ResponseBody
-@RequestMapping("/api/people")
+@RequestMapping("/api/peoples")
 @RestController
+@Slf4j
 public class PeopleController {
 
 
@@ -25,11 +27,11 @@ public class PeopleController {
     @GetMapping
     public ResponseEntity<PeopleModel> getAllPeople(@RequestParam(required = false) Integer page, String searchQuery) {
 
-        URI uri = getUri(page, searchQuery, endpointUri);
-        System.out.println("uri = " + uri);
+        URI uri = getUri(page, searchQuery, endpointUri, null);
 
         try {
             ResponseEntity<PeopleModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, PeopleModel.class);
+            System.out.println("response = " + response.getBody());
             return response;
         } catch (HttpClientErrorException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -39,9 +41,9 @@ public class PeopleController {
     @GetMapping("/{id}")
     public ResponseEntity<PeopleModel> getPeopleById(@PathVariable Integer id) {
 
-        URI uri = getUri(null, null, endpointUri);
+        URI uri = getUri(null, null, endpointUri, id);
 
-        PeopleModel listPeople = restTemplate.getForObject(uri + "/" + id, PeopleModel.class);
+        PeopleModel listPeople = restTemplate.getForObject(uri, PeopleModel.class);
 
         return ResponseEntity.ok(listPeople);
     }

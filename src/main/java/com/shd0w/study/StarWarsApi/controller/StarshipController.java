@@ -24,7 +24,7 @@ public class StarshipController {
     @GetMapping
     public ResponseEntity<StarshipModel> getAllStarships(@RequestParam(required = false) Integer page, String searchQuery) {
 
-        URI uri = getUri(page, searchQuery, endpointUri);
+        URI uri = getUri(page, searchQuery, endpointUri, null);
 
         try {
             ResponseEntity<StarshipModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, StarshipModel.class);
@@ -36,12 +36,12 @@ public class StarshipController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StarshipModel> getAllStarships(@PathVariable Integer id) {
+    public ResponseEntity<StarshipModel> getStarshipById(@PathVariable Integer id) {
 
-        URI uri = getUri(null, null, endpointUri);
+        URI uri = getUri(null, null, endpointUri, id);
 
         try {
-            ResponseEntity<StarshipModel> response = restTemplate.exchange(uri+"/"+id, HttpMethod.GET, null, StarshipModel.class);
+            ResponseEntity<StarshipModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, StarshipModel.class);
             return response;
         } catch (HttpClientErrorException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
