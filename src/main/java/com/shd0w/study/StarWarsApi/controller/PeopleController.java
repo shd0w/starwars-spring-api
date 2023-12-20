@@ -1,6 +1,7 @@
 package com.shd0w.study.StarWarsApi.controller;
 
 import com.shd0w.study.StarWarsApi.model.PeopleModel;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import static com.shd0w.study.StarWarsApi.utils.GetUri.getUri;
 @RequestMapping("/api/peoples")
 @RestController
 @Slf4j
+@Tag(name="People", description = "SWAPI People Endpoint")
 public class PeopleController {
 
 
@@ -26,12 +28,13 @@ public class PeopleController {
 
     @GetMapping
     public ResponseEntity<PeopleModel> getAllPeople(@RequestParam(required = false) Integer page, String searchQuery) {
+        log.info("Iniciando get all people");
 
         URI uri = getUri(page, searchQuery, endpointUri, null);
 
         try {
             ResponseEntity<PeopleModel> response = restTemplate.exchange(uri, HttpMethod.GET, null, PeopleModel.class);
-            System.out.println("response = " + response.getBody());
+            log.info("Response: " + response);
             return response;
         } catch (HttpClientErrorException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
