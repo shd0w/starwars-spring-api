@@ -1,10 +1,9 @@
-package com.shd0w.study.StarWarsApi.service.impl;
+package com.shd0w.study.StarWarsApi.service.Film.impl;
 
 import com.shd0w.study.StarWarsApi.model.FilmModel;
-import com.shd0w.study.StarWarsApi.service.interfaces.FilmInterface;
+import com.shd0w.study.StarWarsApi.service.Film.interfaces.FilmInterface;
 import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;

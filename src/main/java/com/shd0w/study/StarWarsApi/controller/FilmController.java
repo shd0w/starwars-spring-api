@@ -1,7 +1,7 @@
 package com.shd0w.study.StarWarsApi.controller;
 
 import com.shd0w.study.StarWarsApi.model.FilmModel;
-import com.shd0w.study.StarWarsApi.service.impl.FilmService;
+import com.shd0w.study.StarWarsApi.service.Film.impl.FilmService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/films")
 @Tag(name = "Films", description = "SWAPI Films Endpoint")
-@Slf4j
 public class FilmController {
 
     @Autowired

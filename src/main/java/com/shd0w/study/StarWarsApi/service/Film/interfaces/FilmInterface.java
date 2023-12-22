@@ -1,4 +1,4 @@
-package com.shd0w.study.StarWarsApi.service.interfaces;
+package com.shd0w.study.StarWarsApi.service.Film.interfaces;
 
 import com.shd0w.study.StarWarsApi.model.FilmModel;
 import jakarta.annotation.Nullable;
